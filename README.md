@@ -3,7 +3,7 @@ This notebook documents the exploration of optimizing three autoregression model
 
 
 ## Overview
-This project aims to forecast the market share of three operating systems (Linux, macOS, and Windows) using monthly time series data from the [Steam Hardware Survey](https://github.com/myagues/steam-hss-data/releases). The dataset contains aggregated OS usage percentages collected from 2014 to 2021.
+This project aims to forecast the market share of three operating systems (Linux, MacOS, and Windows) using monthly time series data from the [Steam Hardware Survey](https://github.com/myagues/steam-hss-data/releases). The dataset contains aggregated OS usage percentages collected from 2014 to 2021.
 
 The approach decided on for this forecasting problem was from a time series regression task standpoint, treating each OS independently. Based on seasonal patterns in the data, Seasonal ARIMA (SARIMA) models are chosen as the core method. For each platform, SARIMA hyperparameters were tuned based on residual patterns and RMSE validation performance. RMSE was chosen as it is more sensitive to deviation from trends than MSE.
 
@@ -16,7 +16,7 @@ The best models for each OS achieved variances as low as
 | **Windows** | 0.3759 |
 
 ### Data
-This project uses monthly OS market share data collected from the [Steam Hardware Survey](https://github.com/myagues/steam-hss-data/releases) between January 2014 to December 2021. The dataset was filtered and transformed to isolate three platforms: Linux, macOS, and Windows. The raw file is a compressed parquet file with a shape of 262,470 rows × 5 columns and a size of 700 KB.
+This project uses monthly OS market share data collected from the [Steam Hardware Survey](https://github.com/myagues/steam-hss-data/releases) between January 2014 to December 2021. The dataset was filtered and transformed to isolate three platforms: Linux, MacOS, and Windows. The raw file is a compressed parquet file with a shape of 262,470 rows × 5 columns and a size of 700 KB.
 
 #### Preprocessing
 To transform the data to be used in our models we had to find an appropriate monthly aggregate, the "OS Version (total)" category, and then pivot it to form a tidy monthly timeseries per OS. Cleaned and processed datasets are saved to the data/ directory.
@@ -41,7 +41,7 @@ These plots help communicate model fit
 ### The Problem
 What is given is the aggregated monthly data for the market share of each OS from January 2014 to December 2021. What is desired is a reliable forecast for the last year of the given data for every OS. 
 
-The starting approach of detecting and implementing seasonality into an autoregression model was made possible by the pmdarima library. First it became clear that the model would not detect the data as seasonal automatically, which cast some doubts as to the efficacy of this approach. Without seasonality the model was flat, a lifeless straight line eminating from the last datapoint. Forcing seasonality into the model by writing in the parameters yielded impressive results. Firstly, it confirmed through residual plots that the model stuck much closer to the actual data. When testing the new model through training data, RMSE was lowered and the forecast seemed to weave a reliable narrative for every OS trend. 
+The starting approach of detecting and implementing seasonality into an autoregression model was made possible by the pmdarima library. First it became clear that the model would not detect the data as seasonal automatically, which cast some doubts as to the efficacy of this approach. Without seasonality the model was flat, a lifeless straight line emenating from the last datapoint. Forcing seasonality into the model by writing in the parameters yielded impressive results. Firstly, it confirmed through residual plots that the model stuck much closer to the actual data. When testing the new model through training data, RMSE was lowered and the forecast seemed to weave a reliable narrative for every OS trend. 
 
 Sticking with SARIMA and changing parameters where they made sense lowered our RMSE even still, further establishing the reliability of seasonal autoregression for this task. By narrowing the parameters down through these tables:
 
@@ -70,7 +70,7 @@ and
 RMSE was able to go from:
 Linux: ARIMA RMSE of 0.1294 to SARIMA RMSE of 0.1016
 Windows: ARIMA RMSE of 0.5900 to SARIMA RMSE of 0.3759
-macOS: ARIMA RMSE of 0.6436 to SARIMA RMSE of 0.4356
+MacOS: ARIMA RMSE of 0.6436 to SARIMA RMSE of 0.4356
 
 These results validate the use of seasonal autoregressive modeling for forecasting platform market share on Steam, particularly when seasonality is enforced and tuned explicitly. All three SARIMA models prove vastly more predictive than the original ARIMA models. These models stand as a testament to the impressive forecasting work that can be done using nothing but past data points. 
 
@@ -130,7 +130,7 @@ This project follows a modular structure to separate data, modeling, utilities, 
 
 - **`sarima_utils.py`**: Defines `train_sarima`, `forecast_and_evaluate`, `compute_rmse`, and `plot_forecast`. Core logic is imported into notebooks.
 - **`preprocessing.ipynb`**: Filters raw Steam data, pivots by OS, handles missing values, and exports clean data.
-- **`Production.ipynb`**: Forecasts Linux, macOS, and Windows market share. Performs seasonal parameter tuning and visual diagnostics.
+- **`Production.ipynb`**: Forecasts Linux, MacOS, and Windows market share. Performs seasonal parameter tuning and visual diagnostics.
 - **`rmse_summary.csv`**: Compares RMSEs from different seasonal configurations.
 
 
