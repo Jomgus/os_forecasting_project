@@ -24,7 +24,7 @@ To transform the data to be used in our models we had to find an appropriate mon
 ### Visuals
 To assess the presence of seasonality in the OS market share data, seasonal decompositions using statsmodels were applied. This helped confirm the suitability of seasonal autoregressive models (SARIMA).
 
-![Linux Decomp](reports/linux_decomposition)
+![Linux Decomp](reports/linux_decomposition.png)
 
 Final Model Forecasts
 
