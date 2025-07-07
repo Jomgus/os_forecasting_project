@@ -47,17 +47,13 @@ def plot_forecast(train, test, predicted, conf_int, title="", ylabel="Market Sha
     plt.show()
 
 
-def run_full_forecast(ts, name, order, seasonal_order, split_date='2020'):
-    """
-    Splits the data, runs SARIMA, evaluates and plots results.
-    """
-    train = ts[:split_date]
-    test = ts[pd.to_datetime(split_date).year + 1:]
-
-    model = train_sarima(train, order, seasonal_order)
-    predicted, conf_int, rmse = forecast_and_evaluate(model, test)
-
-    title = f"{name} Forecast\nSARIMA{order}x{seasonal_order}, RMSE={rmse:.4f}"
-    plot_forecast(train, test, predicted, conf_int, title)
     
-    return model, rmse
+def compute_rmse(train, test, order, seasonal_order, enforce_stationarity=True, enforce_invertibility=True):
+    model = SARIMAX(train, order=order, seasonal_order=seasonal_order,
+                    enforce_stationarity=enforce_stationarity,
+                    enforce_invertibility=enforce_invertibility)
+    results = model.fit(disp=False)
+    forecast = results.get_forecast(steps=len(test)).predicted_mean
+    forecast.index = test.index
+    rmse = np.sqrt(mean_squared_error(test, forecast))
+    return rmse
