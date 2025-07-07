@@ -28,9 +28,9 @@ To assess the presence of seasonality in the OS market share data, seasonal deco
 
 Final Model Forecasts
 
-![Linux Final](reports/linux_final)
-![Windows Final](reports/windows_final)
-![MacOS Final](reports/osx_final)
+![Linux Final](reports/Linux_final.png)
+![Windows Final](reports/Windows_final.png)
+![MacOS Final](reports/osx_final.png)
 
 Visualized for each platform:
 - Training data (up to 2020)
