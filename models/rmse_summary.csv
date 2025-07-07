@@ -1,0 +1,4 @@
+OS,Model,RMSE,Stationarity Enforced,Invertibility Enforced
+Linux,"SARIMA(1,1,1)(1,1,1,12)",0.1016,True,True
+macOS,"SARIMA(1,1,1)(1,1,1,12)",0.4356,False,False
+Windows,"SARIMA(1,1,1)(1,1,1,12)",0.3759,False,False
