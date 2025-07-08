@@ -68,6 +68,7 @@ and
 | Windows | (1, 0, 1) | (1, 1, 1, 12)  | True                  | True                   | 0.518014 |
 
 RMSE was able to go from:
+
 - Linux: ARIMA RMSE of 0.1294 to SARIMA RMSE of 0.1016
 - Windows: ARIMA RMSE of 0.5900 to SARIMA RMSE of 0.3759
 - macOS: ARIMA RMSE of 0.6436 to SARIMA RMSE of 0.4356
