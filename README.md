@@ -1,5 +1,5 @@
 # Forecasting Steam OS Market Share with SARIMA Models
-This notebook documents the exploration of optimizing three autoregression models through an understanding and tweaking of approaches and parameters. Using data from the steam hardware survey, trends for Linux, macOS, and Windows are independently forecasted to an optimally low RMSE and visually satisfactory forecasting trend.
+This readme documents the exploration of optimizing three autoregression models through an understanding and tweaking of approaches and parameters. Using data from the steam hardware survey, trends for Linux, macOS, and Windows are independently forecasted to an optimally low RMSE and visually satisfactory forecasting trend.
 
 
 ## Overview
